@@ -38,11 +38,14 @@ class AppFixtures extends Fixture
                 ->setEmailCl($this->faker->unique()->email())
                 ->setFirstNameCl($this->faker->firstName())
                 ->setLastNameCl($this->faker->lastName())
-                ->setTelCl($this->faker->phoneNumber())
+                ->setTelCl($this->faker->regexify('[0-9]{10}'))
                 ->setPassword($this->passwordHasher->hashPassword(
                     new Client(),
                     'Test1234!'
                 ));
+
+            $client->setCreatedAt(new \DateTimeImmutable());
+            $client->setUpdatedAt(new \DateTimeImmutable());
 
             $manager->persist($client);
         }

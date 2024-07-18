@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL_CL', fields: ['email_cl'])]
+#[ORM\HasLifecycleCallbacks]
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
 
@@ -47,7 +48,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         max: 255,
         maxMessage: 'Le prénom ne peut pas dépasser {{ limit }} caractères',
         min: 2,
-        minMessage: 'Le prénom doit faire au minimul {{ limit }} caractères'
+        minMessage: 'Le prénom doit faire au minimum {{ limit }} caractères'
     )]
     #[Assert\NotBlank]
     private ?string $firstname_cl = null;
