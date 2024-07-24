@@ -1,16 +1,21 @@
-<header style="background-image: url('path/to/background-image.jpg');">
-    <a href="/">
-        <img src="path/to/main-logo.png" alt="Main Logo">
-    </a>
+<header>
+    <div class="header-logo">
+        <a href="/">
+            <img src="" alt="Logo de Lucile Monti">
+        </a>
+        <p>Secteur Villefranche-de-Rouergue (Aveyron 12)</p>
+    </div>
+
+    <div class="login-logo">
+        <a href=" {{path('login')}} "><i class="bi bi-people-fill"></i></a>
+    </div>
+
     <nav>
         <ul>
-            <li><a href="#">Présentation</a></li>
+            <li><a href="{{ path('home') }}">Présentation</a></li>
             <li><a href="#">Services et prestations</a></li>
             <li><a href="#">Galerie photo</a></li>
             <li><a href="#">Contact</a></li>
         </ul>
     </nav>
-    <div class="login-logo">
-        <img src="path/to/login-logo.png" alt="Login Logo">
-    </div>
 </header>

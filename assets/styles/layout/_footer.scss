@@ -1,0 +1,41 @@
+.footer {
+    //rendre le footer fixe en bas de la page 
+    display: flex;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: $primary;
+    color: $tertiary;
+    padding: 1rem 0;
+    
+    //et disposer les colonnes en flex
+    &-column {
+        flex: 1;
+        padding: 0 1rem;
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        //afficher les logos sociaux en ligne
+        &-socials .li {
+            ul {
+                display: flex;
+                padding: 0;
+                margin: 0;
+
+                li {
+                    margin-right: 10px;
+                    margin-bottom: 0;
+                }
+
+                a {
+                    display: inline-block;
+                    color: $tertiary !important ;
+                }
+            }
+        }
+    }  
+}
+
