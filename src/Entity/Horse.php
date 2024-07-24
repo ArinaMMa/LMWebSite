@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Entity\Traits\DatetimeTrait;
 use App\Entity\Traits\EnableTrait;
 use App\Repository\HorseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -54,6 +56,24 @@ class Horse
     #[ORM\ManyToOne(inversedBy: 'horses')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Client $client_id = null;
+
+    /**
+     * @var Collection<int, DonePrestations>
+     */
+    #[ORM\ManyToMany(targetEntity: DonePrestations::class, inversedBy: 'horses')]
+    private Collection $breeder_ho;
+
+    /**
+     * @var Collection<int, Vet>
+     */
+    #[ORM\ManyToMany(targetEntity: Vet::class, inversedBy: 'horses')]
+    private Collection $vet_id;
+
+    public function __construct()
+    {
+        $this->breeder_ho = new ArrayCollection();
+        $this->vet_id = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -128,6 +148,54 @@ class Horse
     public function setClientId(?Client $client_id): static
     {
         $this->client_id = $client_id;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DonePrestations>
+     */
+    public function getBreederHo(): Collection
+    {
+        return $this->breeder_ho;
+    }
+
+    public function addBreederHo(DonePrestations $breederHo): static
+    {
+        if (!$this->breeder_ho->contains($breederHo)) {
+            $this->breeder_ho->add($breederHo);
+        }
+
+        return $this;
+    }
+
+    public function removeBreederHo(DonePrestations $breederHo): static
+    {
+        $this->breeder_ho->removeElement($breederHo);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Vet>
+     */
+    public function getVetId(): Collection
+    {
+        return $this->vet_id;
+    }
+
+    public function addVetId(Vet $vetId): static
+    {
+        if (!$this->vet_id->contains($vetId)) {
+            $this->vet_id->add($vetId);
+        }
+
+        return $this;
+    }
+
+    public function removeVetId(Vet $vetId): static
+    {
+        $this->vet_id->removeElement($vetId);
 
         return $this;
     }

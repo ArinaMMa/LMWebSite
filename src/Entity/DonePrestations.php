@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DonePrestationsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -30,6 +32,17 @@ class DonePrestations
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $commentary_prestation = null;
+
+    /**
+     * @var Collection<int, Horse>
+     */
+    #[ORM\ManyToMany(targetEntity: Horse::class, mappedBy: 'breeder_ho')]
+    private Collection $horses;
+
+    public function __construct()
+    {
+        $this->horses = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -80,6 +93,33 @@ class DonePrestations
     public function setCommentaryPrestation(?string $commentary_prestation): static
     {
         $this->commentary_prestation = $commentary_prestation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Horse>
+     */
+    public function getHorses(): Collection
+    {
+        return $this->horses;
+    }
+
+    public function addHorse(Horse $horse): static
+    {
+        if (!$this->horses->contains($horse)) {
+            $this->horses->add($horse);
+            $horse->addBreederHo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHorse(Horse $horse): static
+    {
+        if ($this->horses->removeElement($horse)) {
+            $horse->removeBreederHo($this);
+        }
 
         return $this;
     }

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Traits\EnableTrait;
 use App\Repository\VetRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -36,6 +38,17 @@ class Vet
     #[Assert\NotBlank]
     #[Assert\Regex(pattern: '/^0[1-9]([-. ]?[0-9]{2}){4}$/', message: 'Le numéro de téléphone "{{ value }}" n\'est pas un numéro de téléphone valide.')]
     private ?string $tel_vet = null;
+
+    /**
+     * @var Collection<int, Horse>
+     */
+    #[ORM\ManyToMany(targetEntity: Horse::class, mappedBy: 'vet_id')]
+    private Collection $horses;
+
+    public function __construct()
+    {
+        $this->horses = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +99,33 @@ class Vet
     public function setTelVet(string $tel_vet): static
     {
         $this->tel_vet = $tel_vet;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Horse>
+     */
+    public function getHorses(): Collection
+    {
+        return $this->horses;
+    }
+
+    public function addHorse(Horse $horse): static
+    {
+        if (!$this->horses->contains($horse)) {
+            $this->horses->add($horse);
+            $horse->addVetId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHorse(Horse $horse): static
+    {
+        if ($this->horses->removeElement($horse)) {
+            $horse->removeVetId($this);
+        }
 
         return $this;
     }
