@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Entity\Traits\DatetimeTrait;
 use App\Repository\ClientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -75,6 +77,17 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     #[Assert\NotBlank]
     private ?string $tel_cl = null;
+
+    /**
+     * @var Collection<int, Horse>
+     */
+    #[ORM\OneToMany(targetEntity: Horse::class, mappedBy: 'client_id')]
+    private Collection $horses;
+
+    public function __construct()
+    {
+        $this->horses = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -194,6 +207,36 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     public function setTelCl(string $tel_cl): static
     {
         $this->tel_cl = $tel_cl;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Horse>
+     */
+    public function getHorses(): Collection
+    {
+        return $this->horses;
+    }
+
+    public function addHorse(Horse $horse): static
+    {
+        if (!$this->horses->contains($horse)) {
+            $this->horses->add($horse);
+            $horse->setClientId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHorse(Horse $horse): static
+    {
+        if ($this->horses->removeElement($horse)) {
+            // set the owning side to null (unless already changed)
+            if ($horse->getClientId() === $this) {
+                $horse->setClientId(null);
+            }
+        }
 
         return $this;
     }
