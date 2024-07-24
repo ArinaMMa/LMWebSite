@@ -4,28 +4,32 @@
 
 {% block stylesheets %}
 	{{ parent() }}
-	{{ encore_entry_link_tags('login') }}
+	{{ encore_entry_link_tags('app') }}
 {% endblock %}
 
 {% block javascripts %}
 	{{ parent() }}
-	{{ encore_entry_script_tags('login') }}
+	{{ encore_entry_script_tags('app') }}
 {% endblock %}
 
 {% block body %}
-    <section class="login-container">
+    <section class="container">
 		<h1 class="text-center">Créer un compte</h1>
 		<p class="text-center">
 			Créez-vous un compte pour commencer à échanger avec Lucile
 		</p>
 		{{ form_start(form) }}
-		{# <div class="row">
-			<div class="col-md-6">{{ form_row(form.firstName) }}</div>
-			<div class="col-md-6">{{ form_row(form.lastName) }}</div>
-		</div>
-		{{ form_widget(form) }}
-		<button type="submit" class="btn btn-dark">S'inscrire</button> #}
+			<div class="row mb-3">
+				<div class="col-md-6">{{ form_row(form.firstname_cl) }}</div>
+				<div class="col-md-6">{{ form_row(form.lastname_cl) }}</div>
+			</div>
+			<div class="row mb-3">
+				<div class="col-md-6"> {{ form_row(form.email_cl) }} </div>	
+				<div class="col-md-6"> {{ form_row(form.tel_cl) }} </div>
+			</div>
+			{{ form_widget(form) }}
 		{{ form_end(form) }}
+		<button type="submit" class="btn btn-inline btn-primary">S'inscrire</button>
 		<p class="text-center mt-4">
 			Vous avez déjà un compte ?
 			<a href="{{ path('login') }}">Connectez-vous</a>
