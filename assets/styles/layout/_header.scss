@@ -1,0 +1,108 @@
+header {
+    //rendre le header fixe en haut de la page 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    left: 0;
+    padding-top: 1rem;
+    //prendre toute la largeur de la page
+    width: 100%;
+    //couleur du fond et de la police, bordure en bas
+    background-color: $tertiary;
+    color: $primary; 
+    border-bottom: 1px solid $secondary;
+
+    //espacement des logos
+    .header-logo,
+    .login-logo {
+        margin: 0 1rem; 
+    }
+
+    .header-logo {
+        width: max-content;
+        margin-right: auto;
+        margin-left: auto;
+
+        img {
+            width: 50px;
+            height: 50px;
+        }
+
+        p {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+    }
+
+    .login-logo {
+        position: absolute;
+        right: 5%;
+        top: 2%;
+        font-size: 2rem;
+        
+    }
+    
+    //et disposer les colonnes en flex
+    nav {
+        margin-top: 1rem;
+        background-color: $primary;
+        color: $tertiary;
+        padding: 0;
+        height: 3rem;
+        overflow: hidden;
+        width: 100%;
+        
+        //et les liens en ligne
+        ul {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            width: 100%;
+            padding: 0;
+            margin:0;
+            height: 100%;
+            
+            li {
+                flex: 1;
+                display: flex;
+                margin-right: 1rem;
+                // padding: 0.5rem;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: background-color 0.3s ease;
+
+                //supprimer l'espace à droite du dernier élément
+                &:last-child {
+                    margin-right: 0;
+                }
+                
+                &:hover {
+                    background-color: $secondary;
+                    text-decoration: none;
+                }
+
+                a {
+                    color: $tertiary;
+                    font-weight: bold;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    &:hover {
+                        color: $tertiary;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}
+

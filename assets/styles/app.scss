@@ -1,0 +1,22 @@
+//Import abstracts 
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
+//Import Layout
+@import 'layout/header';
+@import 'layout/footer';
+
+//Import vendors
+@import 'vendors/bootstrap';
+
+//Import base
+@import "base/typography";
+@import 'base/base';
+
+
+
+//import components
+@import 'components/card';
+@import 'components/form';
+
+//import pages
