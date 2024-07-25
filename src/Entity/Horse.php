@@ -58,21 +58,25 @@ class Horse
     private ?Client $client_id = null;
 
     /**
-     * @var Collection<int, DonePrestations>
-     */
-    #[ORM\ManyToMany(targetEntity: DonePrestations::class, inversedBy: 'horses')]
-    private Collection $breeder_ho;
-
-    /**
      * @var Collection<int, Vet>
      */
     #[ORM\ManyToMany(targetEntity: Vet::class, inversedBy: 'horses')]
     private Collection $vet_id;
 
+    #[ORM\ManyToOne(inversedBy: 'horses')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Breeder $breeder_ho = null;
+
+    /**
+     * @var Collection<int, DonePrestations>
+     */
+    #[ORM\ManyToMany(targetEntity: DonePrestations::class, inversedBy: 'horses')]
+    private Collection $done_prestation_id;
+
     public function __construct()
     {
-        $this->breeder_ho = new ArrayCollection();
         $this->vet_id = new ArrayCollection();
+        $this->done_prestation_id = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -153,30 +157,6 @@ class Horse
     }
 
     /**
-     * @return Collection<int, DonePrestations>
-     */
-    public function getBreederHo(): Collection
-    {
-        return $this->breeder_ho;
-    }
-
-    public function addBreederHo(DonePrestations $breederHo): static
-    {
-        if (!$this->breeder_ho->contains($breederHo)) {
-            $this->breeder_ho->add($breederHo);
-        }
-
-        return $this;
-    }
-
-    public function removeBreederHo(DonePrestations $breederHo): static
-    {
-        $this->breeder_ho->removeElement($breederHo);
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Vet>
      */
     public function getVetId(): Collection
@@ -196,6 +176,42 @@ class Horse
     public function removeVetId(Vet $vetId): static
     {
         $this->vet_id->removeElement($vetId);
+
+        return $this;
+    }
+
+    public function getBreederHo(): ?Breeder
+    {
+        return $this->breeder_ho;
+    }
+
+    public function setBreederHo(?Breeder $breeder_ho): static
+    {
+        $this->breeder_ho = $breeder_ho;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DonePrestations>
+     */
+    public function getDonePrestationId(): Collection
+    {
+        return $this->done_prestation_id;
+    }
+
+    public function addDonePrestationId(DonePrestations $donePrestationId): static
+    {
+        if (!$this->done_prestation_id->contains($donePrestationId)) {
+            $this->done_prestation_id->add($donePrestationId);
+        }
+
+        return $this;
+    }
+
+    public function removeDonePrestationId(DonePrestations $donePrestationId): static
+    {
+        $this->done_prestation_id->removeElement($donePrestationId);
 
         return $this;
     }
