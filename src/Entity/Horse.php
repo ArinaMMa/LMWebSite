@@ -16,7 +16,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Horse
 {
     use DatetimeTrait;
-    use EnableTrait;
 
     public const SEX_F = 'Femelle';
     public const SEX_M = 'Mâle';

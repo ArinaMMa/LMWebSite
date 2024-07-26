@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\DatetimeTrait;
 use App\Entity\Traits\EnableTrait;
 use App\Repository\VetRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -12,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: VetRepository::class)]
 class Vet
 {
-    use EnableTrait;
+    use DatetimeTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
