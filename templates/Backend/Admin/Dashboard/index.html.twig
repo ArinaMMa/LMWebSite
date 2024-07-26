@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page d'adminitratrice {{parent()}} {% endblock %}
+{% block title %}Page d'administratrice {{parent()}} {% endblock %}
 
 {% block body %}
 
@@ -8,7 +8,7 @@
         <li>Modifier la page de présentation</li>
         <li>Modifier les services</li>
         <li>Accès aux utilisateurs</li>
-        <li>Fiches cheval</li>
+        <li><a href=" {{path('admin.horse.show')}} ">Fiches cheval</a></li>
         <li>Statistiques</li>  
     </ul>
 
