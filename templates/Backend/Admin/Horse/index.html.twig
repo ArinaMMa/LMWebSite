@@ -4,13 +4,45 @@
 
 {% block body %}
 
-{# TODO : cards avec tous les chevaux et barre de recherche #}
+{# TODO : tableau avec tous les chevaux et barre de recherche #}
     <h1>Chevaux suivis</h1>
-    <ul>
-        <li><a href=" {{path('admin.horse.create')}} ">Ajouter un cheval</a></li>
-        {# <li><a href=" {{path('admin.horse.{id}.edit')}} ">Modifier un cheval</a></li>
-        <li><a href=" {{path('admin.horse.{id}.delete')}} ">Supprimer un cheval</a></li> #}
-        
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Sexe</th>
+                <th>Race</th>
+                <th>Age</th>
+                <th>Propriétaire</th>
+                <th>Vétérinaire</th>
+                <th>Prestations réalisées</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for horse in horses %}
+                <tr>
+                    <td>{{ horse.nameHo }}</td>
+                    <td>{{ horse.sexHo }}</td>
+                    <td>{{ horse.breedHo }}</td>
+                    {# âge calculé du cheval #}
+                    <td> {{ 'now'|date('Y') - horse.birthdateHo|date('Y') }} ans </td>
+                    <td>{{ horse.clientId.lastnameCl }} {{ horse.clientId.firstnameCl }} </td>
+                    <td>{{ horse.vetId.lastnameVet }} </td>
+                    <td><p>service</p></td>
+                    <th>
+                        <a href=" {{path('admin.horse.edit', {'id': horse.id})}} ">Modifier</a>
+                        <form method="post" action="{{ path('admin.horse.delete', {'id': horse.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce cheval ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ horse.id) }}">
+                            <button type="submit">Supprimer</button>
+                        </form>
+                    </th>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div>
+        <a href=" {{path('admin.horse.create')}} ">Ajouter un cheval</a>
+    </div>
 
 {% endblock %}

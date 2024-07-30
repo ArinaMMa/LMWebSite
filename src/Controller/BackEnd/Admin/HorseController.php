@@ -25,6 +25,7 @@ class HorseController extends AbstractController
     {
         return $this->render('BackEnd/Admin/Horse/index.html.twig', [
             'horses' => $this->horseRepository->findAll(),
+            
         ]);
     }
 
@@ -70,7 +71,7 @@ class HorseController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->flush();
 
-            return $this->redirectToRoute('app.admin.horse.show', ['id' => $horse->getId()]);
+            return $this->redirectToRoute('admin.horse.index', ['id' => $horse->getId()]);
         }
 
         return $this->render('Backend/Admin/Horse/edit.html.twig', [
@@ -79,12 +80,11 @@ class HorseController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: '.delete', methods: ['POST'])]
-    public function delete(Request $request, int $id): Response
+    public function delete(Request $request, ?Horse $horse): Response
     {
-        $horse = $this->horseRepository->find($id);
-
         if(!$horse) {
             throw $this->createNotFoundException('Cheval non trouvé');
+            // return $this->redirectToRoute('admin.horse.index');
         }
 
         if ($this->isCsrfTokenValid('delete' . $horse->getId(), $request->request->get('_token'))) {
@@ -92,6 +92,6 @@ class HorseController extends AbstractController
             $this->em->flush();
         }
 
-        return $this->redirectToRoute('app.admin.horse.index');
+        return $this->redirectToRoute('admin.horse.index');
     }
 }

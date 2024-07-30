@@ -43,9 +43,7 @@ class AppFixtures extends Fixture
 
         $manager->persist($client);
 
-        // Création de 10 utilisateurs
-        //Array pour les cliens
-        
+        // Création de 10 utilisateurs        
         for ($i = 0; $i < 10; $i++) {
             $client = (new Client())
                 ->setEmailCl($this->faker->unique()->email())
@@ -80,7 +78,6 @@ class AppFixtures extends Fixture
         }
 
         // Création de 10 fiches cheval
-
         for ($i = 0; $i < 10; $i++) {
             $horse = (new Horse())
                 ->setNameHo($this->faker->name())
