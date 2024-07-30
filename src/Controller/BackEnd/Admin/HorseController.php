@@ -2,6 +2,7 @@
 
 namespace App\Controller\BackEnd\Admin;
 
+use App\Entity\Horse;
 use App\Form\HorseType;
 use App\Repository\HorseRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,26 +20,37 @@ class HorseController extends AbstractController
         private HorseRepository $horseRepository,
     ) {}
 
-    #[Route('/index', name: '.show')]
+    #[Route('', name: '.index')]
     public function index(): Response
     {
         return $this->render('BackEnd/Admin/Horse/index.html.twig', [
-            'controller_name' => 'HorseController',
+            'horses' => $this->horseRepository->findAll(),
         ]);
     }
 
-    #[Route('/create', name: '.create')]
-    public function create(): Response
+    #[Route('/create', name: '.create', methods: ['GET', 'POST'])]
+    public function create(Request $request): Response
     {
+        $horse = new Horse();
+        $form = $this->createForm(HorseType::class, $horse);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($horse);
+            $this->em->flush();
+
+            return $this->redirectToRoute('app.admin.horse.show', ['id' => $horse->getId()]);
+        }
+
         return $this->render('BackEnd/Admin/Horse/create.html.twig', [
             'controller_name' => 'HorseController',
         ]);
     }
 
-    #[Route('/{id}', name: '.show', methods: ['GET'])]
-    public function show(int $id): Response
+    #[Route('/{id}', name: '.read', methods: ['GET'])]
+    public function read(int $id): Response
     {
-        return $this->render('Backend/Admin/Horse/show.html.twig', [
+        return $this->render('Backend/Admin/Horse/read.html.twig', [
             'horse' => $this->horseRepository->find($id),
         ]);
     }

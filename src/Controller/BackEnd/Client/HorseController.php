@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('compte/client/cheval', name: 'app.client.horse')]
+#[Route('profile/client/horse', name: 'app.client.horse')]
 class HorseController extends AbstractController
 {
     public function __construct(

@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/compte/client', name: 'app.compte')]
+#[Route('profile/client', name: 'app.client')]
 class ClientController extends AbstractController
 {
     public function __construct(

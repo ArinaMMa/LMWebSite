@@ -1,17 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bienvenue, { client.firstname }  {{parent()}} {% endblock %}
+{% block title %}Espace personnel  {{parent()}} {% endblock %}
 
 {% block body %}
 
     <div>
-        <h1>Tableau de bord</h1>
-        <ul>
-            <li><a href=" {{path('client.horse')}} ">Voir mes chevaux</a></li>
-            <li><a href=" {{path('client.horse.create')}} ">Ajouter un cheval</a></li>
-            <li><a href=" {{path('client.horse.{id}.edit')}} ">Modifier un cheval</a></li>
-            <li><a href=" {{path('client.horse.{id}.delete')}} ">Supprimer un cheval</a></li>
-        </ul>
+        <h1>Bienvenue, X </h1>
+        <div>
+            <h2>Tableau de bord</h2>
+            <ul>
+                {# <li><a href=" {{path('client.horse')}} ">Voir mes chevaux</a></li>
+                <li><a href=" {{path('client.horse.create')}} ">Ajouter un cheval</a></li>
+                <li><a href=" {{path('client.horse.{id}.edit')}} ">Modifier un cheval</a></li>
+                <li><a href=" {{path('client.horse.{id}.delete')}} ">Supprimer un cheval</a></li> #}
+            </ul>
+        </div>
     </div>
 
 {% endblock %}

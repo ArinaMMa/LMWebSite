@@ -4,9 +4,8 @@
 
 {% block body %}
 
-    {# TODO : form de création d'une fiche cheval avec un menu déroulant pour attribuer un propriétaire #}
     <h1>Création d'une fiche cheval</h1>
 
-    <p>Bientôt disponible</p>
+    {% include('Form/_horseForm.html.twig' with {ButtonLabel: 'Créer'} ) %}
 
 {% endblock %}
