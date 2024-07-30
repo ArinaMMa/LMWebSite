@@ -39,11 +39,11 @@ class HorseController extends AbstractController
             $this->em->persist($horse);
             $this->em->flush();
 
-            return $this->redirectToRoute('app.admin.horse.show', ['id' => $horse->getId()]);
+            return $this->redirectToRoute('admin.horse.index', ['id' => $horse->getId()]);
         }
 
         return $this->render('BackEnd/Admin/Horse/create.html.twig', [
-            'controller_name' => 'HorseController',
+            'form' => $form,
         ]);
     }
 

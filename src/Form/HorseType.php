@@ -9,11 +9,11 @@ use App\Entity\Breeder;
 use App\Entity\DonePrestations;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class HorseType extends AbstractType
 {
@@ -26,7 +26,14 @@ class HorseType extends AbstractType
                     'placeholder' => 'Race du cheval'
                 ]
             ])
-            ->add('sex_ho')
+            ->add('sex_ho', ChoiceType::class, [
+                'label' => 'Sexe du cheval',
+                'choices' => [
+                    'Mâle' => 'Mâle',
+                    'Femelle' => 'Femelle',
+                    'Hongre' => 'Hongre',
+                ],
+            ])
             ->add('birthdate_ho', DateType::class, [
                 'label' => 'Date de naissance',
                 'attr' => [
@@ -49,20 +56,28 @@ class HorseType extends AbstractType
             //     'download_uri' => false,
             //     'image_uri' => true,
             //     'asset_helper' => false,
-            // ])   
+            // ])  
+            ->add('client_id', EntityType::class, [
+                'class' => Client::class,
+                'choice_label' => 'lastname_cl',
+                'placeholder' => 'Choisir un client',
+                'multiple' => false,
+            ]) 
             ->add('breeder_ho', EntityType::class, [
                 'class' => Breeder::class,
-                'choice_label' => 'id',
-                'multiple' => true,
+                'choice_label' => 'name_br',
+                'placeholder' => 'Choisir un éleveur',
+                'multiple' => false,
             ])
-            ->add('done_prestation_id', EntityType::class, [
-                'class' => DonePrestations::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
+            // ->add('done_prestation_id', EntityType::class, [
+            //     'class' => DonePrestations::class,
+            //     'choice_label' => 'id',
+            //     'multiple' => true,
+            // ])
             ->add('vet_id', EntityType::class, [
                 'class' => Vet::class,
-                'choice_label' => 'id',
+                'choice_label' => 'lastname_vet',
+                'placeholder' => 'Choisir un vétérinaire',
                 'multiple' => true,
             ])
         ;

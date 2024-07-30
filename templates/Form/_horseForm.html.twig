@@ -1,14 +1,10 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Création d'une fiche cheval - ROLE {{parent()}} {% endblock %}
-
 {% block body %}
 
     {# TODO : modifier le titre selon qui ouvre la page (nom proprio / admin) #}
-    {# TODO : menu déroulant pour attribuer un propriétaire pour l'administratrice #}
+    {# TODO : menu déroulant pour attribuer un propriétaire pour l'administratrice ET intégration directe de l'id client quand il est co #}
     {# TODO : menu déroulant pour la race de cheval #}
 
-    <h1>Création d'une fiche cheval</h1>
+
 
     {{ form_start(form, {attr: {class: 'card w-50 mx-auto' }}) }}
     {{ form_widget(form) }}
