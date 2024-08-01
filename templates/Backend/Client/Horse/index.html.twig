@@ -7,31 +7,51 @@
 <div class="example-wrapper">
     <h1>Bienvenue, USER </h1>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card card-body">
-                <h2 class="card-title>">Mes chevaux</h2>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Nom</th>
-                            <th>Age</th>
-                            <th>Sexe</th>
-                            <th>Robe</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {# {% for horse in horses %}
-                            <tr>
-                                <td>{{ horse.name }}</td>
-                                <td>{{ horse.age }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody> #}
-                </table>
-            </div>
-        </div>
-    </div>
+    <h2 class="card-title>">Mes chevaux</h2>
+    <a href="{{ path('app.client.horses.create') }}" class="btn btn-primary text-light">Ajouter un cheval</a>
+    {# {% if client.horses|length > 0 %} #}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Sexe</th>
+                    <th>Race</th>
+                    <th>Age</th>
+                    <th>Vétérinaire</th>
+                    <th>Actions réalisées</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for horse in horses %}
+                    <tr>
+                        <td>{{ horse.nameHo }}</td>
+                        <td>{{ horse.sexHo }}</td>
+                        <td>{{ horse.breedHo }}</td>
+                        {# âge calculé du cheval #}
+                        <td> {{ 'now'|date('Y') - horse.birthdateHo|date('Y') }} ans </td>
+                        <td>
+                            {% for vet in horse.vetId %}
+                                {{ vet.lastnameVet }} <br>
+                            {% endfor %} </td>
+                        <td>
+                            {% for donePrestations in horse.donePrestationId %}
+                                {{ donePrestations.id }} <br>
+                            {% endfor %}
+                        </td>
+                        <th>
+                            <a href=" {{ path('app.client.horses.edit', {'id': horse.id}) }} ">Modifier</a>
+                            <form method="POST" action="{{path('app.client.horses.delete', {'id': horse.id})}}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce cheval ?');>
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ horse.id) }}">
+                            <button type="submit">Supprimer</button>
+                            </form>
+                        </th>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {# {% else %}
+        <p>Vous n'avez pas encore de cheval enregistré.</p>
+    {% endif %} #}
 </div>
 {% endblock %}
