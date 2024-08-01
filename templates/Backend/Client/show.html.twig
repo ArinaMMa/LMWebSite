@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes informations {{parent()}} {% endblock %}
+
+{% block body %}
+
+    {# Affichage des informations du client #}
+    <div>
+        <h1>Mes informations</h1>
+        <div>
+            <h2>Informations personnelles</h2>
+            <ul>
+                <li>Nom : {{ client.lastnameCl }}</li>
+                <li>Prénom : {{ client.firstnameCl }}</li>
+                <li>Email : {{ client.emailCl }}</li>
+                <li>Téléphone : {{ client.telCl }}</li>
+                <li>Anniversaire : {{ client.birthdateCl }} </li>
+                {# TODO: ajout liens vers entity Address #}
+                {# <li>Adresse : {{ client.address }}</li>
+                <li>Code postal : {{ client.zipcode }}</li>
+                <li>Ville : {{ client.city }}</li> #}
+            </ul>
+            {# Modification des informations #}
+            <a href="{{ path('app.client.edit', {'id': client.id}) }}">Modifier mes informations</a>
+        </div>
+        <div>
+            <h2>Mes prochains rendez-vous</h2>
+            
+        </div>
+
+{% endblock %}

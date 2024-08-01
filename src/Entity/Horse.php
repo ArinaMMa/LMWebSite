@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Entity\Traits\DatetimeTrait;
-use App\Entity\Traits\EnableTrait;
 use App\Repository\HorseRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,22 +14,27 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\HasLifecycleCallbacks]
 class Horse
 {
+    //Un trait permettant de factoriser le code pour les champs createdAt et updatedAt
     use DatetimeTrait;
 
+    //initialisation des constantes pour le sexe du cheval
     public const SEX_F = 'Femelle';
     public const SEX_M = 'Mâle';
     public const SEX_H = 'Hongre';
 
+    //L'ID est généré automatiquement par Symfony
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    //La race du cheval est obligatoire
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 3, max: 255)]
     private ?string $breed_ho = null;
 
+    //Le sexe du cheval est obligatoire et doit être l'une des valeurs suivantes : Femelle, Mâle, Hongre définies plus haut
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Choice(
@@ -41,43 +45,52 @@ class Horse
         ])]
     private ?string $sex_ho = null;
 
+    //La date de naissance du cheval est obligatoire
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $birthdate_ho = null;
 
+    //Le nom du cheval est obligatoire
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Length(min: 3, max: 255)]
     private ?string $name_ho = null;
 
+    //La photo du cheval n'est pas obligatoire et est gérée par VichUploaderBundle
     #[ORM\Column(nullable: true)]
     private ?string $picture_ho = null;
 
+    //Le client propriétaire du cheval est obligatoire ; un cheval n'a qu'un seul propriétaire
     #[ORM\ManyToOne(inversedBy: 'horses')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Client $client_id = null;
 
+    //Les vétérinaires du cheval sont optionnels ; un cheval peut avoir plusieurs vétérinaires
     /**
      * @var Collection<int, Vet>
      */
     #[ORM\ManyToMany(targetEntity: Vet::class, inversedBy: 'horses')]
     private Collection $vet_id;
 
+    //L'éleveur du cheval est obligatoire ; un cheval n'a qu'un seul éleveur. Une option permettra de renseigner "Eleveur inconnu" si l'éleveur n'est pas connu
     #[ORM\ManyToOne(inversedBy: 'horses')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Breeder $breeder_ho = null;
 
+    //Les prestations effectuées sur le cheval sont optionnelles ; un cheval peut avoir plusieurs prestations effectuées
     /**
      * @var Collection<int, DonePrestations>
      */
     #[ORM\ManyToMany(targetEntity: DonePrestations::class, inversedBy: 'horses')]
     private Collection $done_prestation_id;
 
+    //Le constructeur initialise les collections de vétérinaires et de prestations effectuées
     public function __construct()
     {
         $this->vet_id = new ArrayCollection();
         $this->done_prestation_id = new ArrayCollection();
     }
 
+    //Les getters et setters sont générés automatiquement par Symfony
     public function getId(): ?int
     {
         return $this->id;

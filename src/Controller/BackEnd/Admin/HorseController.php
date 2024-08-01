@@ -69,6 +69,7 @@ class HorseController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($horse);
             $this->em->flush();
 
             return $this->redirectToRoute('admin.horse.index', ['id' => $horse->getId()]);

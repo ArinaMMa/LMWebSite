@@ -22,8 +22,18 @@ class HorseController extends AbstractController
     #[Route('', name: '.index', methods: ['GET'])]
     public function index(): Response
     {
+        $user = $this->getUser();
+
+        //Admin voit tous les chevaux
+        if($this->isGranted('ROLE_ADMIN')) {
+            $horses = $this->horseRepository->findAll();
+        } else {
+            //Client voit uniquement les chevaux dont il est propriétaire
+            $horses = $user->getHorses();
+        }
+
         return $this->render('Backend/Client/Horse/index.html.twig', [
-            'horses' => $this->horseRepository->findAll(),
+            'horses' => $horses,
         ]);
     }
 

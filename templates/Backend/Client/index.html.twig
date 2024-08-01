@@ -13,8 +13,15 @@
                 <li><a href=" {{path('app.client.horses.create')}} ">Ajouter un cheval</a></li>
                 <li><a href="#">Mes rendez-vous avec Lucile</a></li>
                 {# TODO: une page avec rdv passés et rdv futurs, lien vers docs #}
-                <li><a href=" # ">Accéder à mes informations</a></li>
-                <li><a href=" # ">Supprimer mon compte</a></li>
+                <li><a href=" {{path('app.client.show')}} ">Accéder à mes informations</a></li>
+                {# TODO: gérer la suppression du compte avec vérification par mot de passe #}
+                <li>
+                    Supprimer son compte
+                    {# <form method="POST" action="{{path('app.client.delete', {'id': client.id})}}" onsubmit="return confirm('Êtes-vous sûr.e de vouloir supprimer votre compte ?');>
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ client.id) }}">
+                    <button type="submit">Supprimer</button>
+                    </form> #}
+                </li>
             </ul>
         </div>
     </div>
