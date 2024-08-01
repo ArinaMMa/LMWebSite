@@ -83,7 +83,7 @@ class AppFixtures extends Fixture
                 ->setNameHo($this->faker->name())
                 ->setBreedHo($this->faker->word())
                 ->setBreederHo($breeders[array_rand($breeders)])
-                ->setSexHo($this->faker->randomElement(['SEX_F', 'SEX_M', 'SEX_H']))
+                ->setSexHo($this->faker->randomElement(['Femelle', 'Mâle', 'Hongre']))
                 ->setBirthDateHo($this->faker->dateTimeBetween('-10 years', '-1 years'))
                 ->setClientId($clients[array_rand($clients)]);
 
