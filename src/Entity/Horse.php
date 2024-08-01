@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Entity\Traits\DatetimeTrait;
 use App\Entity\Traits\EnableTrait;
 use App\Repository\HorseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -14,7 +16,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Horse
 {
     use DatetimeTrait;
-    use EnableTrait;
 
     public const SEX_F = 'Femelle';
     public const SEX_M = 'Mâle';
@@ -54,6 +55,28 @@ class Horse
     #[ORM\ManyToOne(inversedBy: 'horses')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Client $client_id = null;
+
+    /**
+     * @var Collection<int, Vet>
+     */
+    #[ORM\ManyToMany(targetEntity: Vet::class, inversedBy: 'horses')]
+    private Collection $vet_id;
+
+    #[ORM\ManyToOne(inversedBy: 'horses')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Breeder $breeder_ho = null;
+
+    /**
+     * @var Collection<int, DonePrestations>
+     */
+    #[ORM\ManyToMany(targetEntity: DonePrestations::class, inversedBy: 'horses')]
+    private Collection $done_prestation_id;
+
+    public function __construct()
+    {
+        $this->vet_id = new ArrayCollection();
+        $this->done_prestation_id = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -128,6 +151,66 @@ class Horse
     public function setClientId(?Client $client_id): static
     {
         $this->client_id = $client_id;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Vet>
+     */
+    public function getVetId(): Collection
+    {
+        return $this->vet_id;
+    }
+
+    public function addVetId(Vet $vetId): static
+    {
+        if (!$this->vet_id->contains($vetId)) {
+            $this->vet_id->add($vetId);
+        }
+
+        return $this;
+    }
+
+    public function removeVetId(Vet $vetId): static
+    {
+        $this->vet_id->removeElement($vetId);
+
+        return $this;
+    }
+
+    public function getBreederHo(): ?Breeder
+    {
+        return $this->breeder_ho;
+    }
+
+    public function setBreederHo(?Breeder $breeder_ho): static
+    {
+        $this->breeder_ho = $breeder_ho;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DonePrestations>
+     */
+    public function getDonePrestationId(): Collection
+    {
+        return $this->done_prestation_id;
+    }
+
+    public function addDonePrestationId(DonePrestations $donePrestationId): static
+    {
+        if (!$this->done_prestation_id->contains($donePrestationId)) {
+            $this->done_prestation_id->add($donePrestationId);
+        }
+
+        return $this;
+    }
+
+    public function removeDonePrestationId(DonePrestations $donePrestationId): static
+    {
+        $this->done_prestation_id->removeElement($donePrestationId);
 
         return $this;
     }
