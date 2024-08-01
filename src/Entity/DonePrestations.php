@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\DatetimeTrait;
 use App\Repository\DonePrestationsRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -10,6 +13,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: DonePrestationsRepository::class)]
 class DonePrestations
 {
+    use DatetimeTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -30,6 +35,18 @@ class DonePrestations
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $commentary_prestation = null;
+
+    /**
+     * @var Collection<int, Horse>
+     */
+    #[ORM\ManyToMany(targetEntity: Horse::class, mappedBy: 'done_prestation_id')]
+    private Collection $horses;
+
+
+    public function __construct()
+    {
+        $this->horses = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -83,4 +100,32 @@ class DonePrestations
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Horse>
+     */
+    public function getHorses(): Collection
+    {
+        return $this->horses;
+    }
+
+    public function addHorse(Horse $horse): static
+    {
+        if (!$this->horses->contains($horse)) {
+            $this->horses->add($horse);
+            $horse->addDonePrestationId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHorse(Horse $horse): static
+    {
+        if ($this->horses->removeElement($horse)) {
+            $horse->removeDonePrestationId($this);
+        }
+
+        return $this;
+    }
+
 }
