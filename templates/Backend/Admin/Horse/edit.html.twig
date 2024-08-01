@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Modifier les informations de mon cheval {{ parent() }} {% endblock %}
+
+{% block body %}
+
+    <div class="example-wrapper">
+
+        <h1>Modifier les informations de mon cheval</h1>
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="card card-body">
+
+                    <h2 class="card-title>">Informations du cheval</h2> 
+                        {% include 'Form/_horseForm.html.twig' with {ButtonLabel: 'Modifier'} %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

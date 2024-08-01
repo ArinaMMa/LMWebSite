@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Présentation {{parent()}} {% endblock %}
+
+{% block body %}
+
+    <section class="presentation">
+        <h2>Qui suis-je ?</h2>
+        <div class="presentation-block">
+            <img src="" alt="Lucile Monti">
+            <div class="presentaton-text">
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto neque dolorem cumque eum molestiae eveniet error ducimus, quod laboriosam nobis vel sapiente nostrum in eos odio pariatur. Hic, repudiandae? Libero laudantium possimus nihil, accusantium explicabo a dolor nobis cum porro, natus facilis quidem praesentium aperiam officia quasi officiis debitis perspiciatis iusto? Laudantium molestias beatae soluta autem. Iste sint eveniet accusamus omnis temporibus id expedita adipisci nostrum soluta rerum voluptatum magnam, deserunt ea. Voluptatibus assumenda quaerat illum praesentium omnis reiciendis et, natus, deleniti quae, iusto doloribus animi ad numquam iste facilis cumque iure reprehenderit aperiam totam quisquam sit culpa excepturi rem aspernatur. Beatae eum possimus animi voluptas expedita tempora autem quia, mollitia odit inventore maiores illo, nostrum, quod quam earum? Amet nam molestiae voluptate! Magni, perspiciatis dolorum officiis excepturi facere quaerat pariatur natus voluptate, veritatis aut maiores iste quos quia corrupti, eum laboriosam similique ad itaque qui! Officia impedit dicta officiis!</p>
+            </div>
+
+            <div class="presentation-award">
+                <h3>Prix remportés</h3>
+                <img src="" alt="1er prix">
+                <img src="" alt="2e prix">
+                <img src="" alt="3e prix">
+                <img src="" alt="4e prix">
+                <img src="" alt="5e prix">
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <h2>Services et prestations</h2>
+        <div class="services-cards">
+            <div class="services-cards-activity">
+                <img src="" alt="Service 1">
+                <h3>Service 1</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+                <em>Prix €</em>
+            </div>
+
+            <div class="services-cards-activity">
+                <img src="" alt="Service 2">
+                <h3>Service 2</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+                <em>Prix €</em> 
+            </div>
+
+            <div class="services-cards-activity">
+                <img src="" alt="Service 3">
+                <h3>Service 3</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+                <em>Prix €</em>
+            </div>
+
+            <div class="services-cards-activity">
+                <img src="" alt="Service 4">
+                <h3>Service 4</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+                <em>Prix €</em>
+            </div>
+
+            <div class="services-cards-activity">
+                <img src="" alt="Service 5">
+                <h3>Service 5</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+                <em>Prix €</em>
+            </div>
+
+            <div class="services-cards-activity">
+                <img src="" alt="Service 6">
+                <h3>Service 6</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+                <em>Prix €</em>
+            </div>
+        
+        </div>
+    </section>
+
+    <section class="photos">
+        <h2>Galerie Photos</h2>
+        <div class="photos-event">
+            <img src="" alt="Photo 1">
+            <img src="" alt="Photo 2">
+            <img src="" alt="Photo 3">
+            <img src="" alt="Photo 4">
+        </div>
+        <div class="photos-event">
+            <img src="" alt="Photo 1">
+            <img src="" alt="Photo 2">
+            <img src="" alt="Photo 3">
+            <img src="" alt="Photo 4">
+        </div>
+        <div class="photos-event">
+            <img src="" alt="Photo 1">
+            <img src="" alt="Photo 2">
+            <img src="" alt="Photo 3">
+            <img src="" alt="Photo 4">
+        </div>
+    </section>
+
+    <section clas="contacts">
+        <h2>Contact</h2>
+        <img src="" alt="Logo Lucile Monti">
+        <form action="">
+            <label for="name">Nom</label>
+            <input type="text" name="name" id="name" required>
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required>
+            <label for="message">Message</label>
+            <textarea name="message" id="message" required></textarea>
+            <button type="submit">Envoyer</button>
+        </form>
+    </section>
+
+{% endblock %}
