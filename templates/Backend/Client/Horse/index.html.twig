@@ -25,7 +25,7 @@
             <tbody>
                 {% for horse in horses %}
                     <tr>
-                        <td>{{ horse.nameHo }}</td>
+                        <td><a href="{{path('app.client.horses.show', {'id': horse.id})}}">{{ horse.nameHo }}</a></td>
                         <td>{{ horse.sexHo }}</td>
                         <td>{{ horse.breedHo }}</td>
                         {# âge calculé du cheval #}
