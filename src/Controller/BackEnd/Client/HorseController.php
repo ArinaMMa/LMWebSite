@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('profile/client/horse', name: 'app.client.horse')]
+#[Route('profile/client/horses', name: 'app.client.horses')]
 class HorseController extends AbstractController
 {
     public function __construct(
@@ -70,7 +70,9 @@ class HorseController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->flush();
 
-            return $this->redirectToRoute('app.client.horse.show', ['id' => $horse->getId()]);
+            // TODO: Add a flash message
+            // TODO: Redirect to the show page
+            return $this->redirectToRoute('app.client.horses.index', ['id' => $horse->getId()]);
         }
 
         return $this->render('Backend/Client/Horse/edit.html.twig', [
