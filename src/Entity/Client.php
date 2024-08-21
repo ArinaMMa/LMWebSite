@@ -226,7 +226,16 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getHorses(): Collection
     {
+        //La méthode getHorses() retourne la collection de chevaux
         return $this->horses;
+    }
+
+    public function getHorsesByClient(Client $client): Collection
+    {
+        //La méthode getHorsesByClient() retourne la collection de chevaux d'un client
+        return $this->horses->filter(function (Horse $horse) {
+            return $horse->getClientId() === $this;
+        });
     }
 
     public function addHorse(Horse $horse): static

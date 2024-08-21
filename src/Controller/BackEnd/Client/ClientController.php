@@ -79,4 +79,5 @@ class ClientController extends AbstractController
         return $this->redirectToRoute('app.home');
     }
 
+    //TODO: renvoi vers la page profil du client après login
 }
