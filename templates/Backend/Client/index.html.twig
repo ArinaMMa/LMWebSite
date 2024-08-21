@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace personnel  {{parent()}} {% endblock %}
+
+{% block body %}
+
+    <div>
+        <h1>Bienvenue, X </h1>
+        <div>
+            <h2>Tableau de bord</h2>
+            <ul>
+                <li><a href=" {{path('app.client.horses.index')}} ">Voir mes chevaux</a></li>
+                <li><a href=" {{path('app.client.horses.create')}} ">Ajouter un cheval</a></li>
+                <li><a href="#">Mes rendez-vous avec Lucile</a></li>
+                {# TODO: une page avec rdv passés et rdv futurs, lien vers docs #}
+                <li><a href=" {{path('app.client.show')}} ">Accéder à mes informations</a></li>
+                {# TODO: gérer la suppression du compte avec vérification par mot de passe #}
+                <li>
+                    Supprimer son compte
+                    {# <form method="POST" action="{{path('app.client.delete', {'id': client.id})}}" onsubmit="return confirm('Êtes-vous sûr.e de vouloir supprimer votre compte ?');>
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ client.id) }}">
+                    <button type="submit">Supprimer</button>
+                    </form> #}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

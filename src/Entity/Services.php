@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\DatetimeTrait;
+use App\Entity\Traits\EnableTrait;
 use App\Repository\ServicesRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,6 +12,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: ServicesRepository::class)]
 class Services
 {
+    use DatetimeTrait;
+    // use EnableTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

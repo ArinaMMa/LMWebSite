@@ -17,14 +17,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\HasLifecycleCallbacks]
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
-
+    //Un trait permettant de factoriser le code pour les champs createdAt et updatedAt
     use DatetimeTrait;
     
+    //L'ID est généré automatiquement par Symfony
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    //L'email est unique, c'est la méthode de connexion de l'utilisateur
     #[ORM\Column(length: 180)]
     #[Assert\Length(
         max: 180,
@@ -33,18 +35,21 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank]
     private ?string $email_cl = null;
 
+    //Il existe 2 rôles : ROLE_USER et ROLE_ADMIN, lequel n'appartient qu'à une personne (actuellement)
     /**
      * @var list<string> The user roles
      */
     #[ORM\Column]
     private array $roles = [];
 
+    //Le mot de passe est hashé pour des raisons de sécurité
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
     private ?string $password = null;
 
+    //Le prénom et le nom sont des champs obligatoires
     #[ORM\Column(length: 255)]
     #[Assert\Length(
         max: 255,
@@ -65,9 +70,11 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank]
     private ?string $lastname_cl = null;
 
+    //La date de naissance est optionnelle
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $birthdate_cl = null;
 
+    //Le numéro de téléphone est obligatoire et doit faire 10 caractères
     #[ORM\Column(length: 10)]
     #[Assert\Length(
         max: 10,
@@ -78,17 +85,20 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank]
     private ?string $tel_cl = null;
 
+    //Un client peut avoir plusieurs chevaux
     /**
      * @var Collection<int, Horse>
      */
     #[ORM\OneToMany(targetEntity: Horse::class, mappedBy: 'client_id')]
     private Collection $horses;
 
+    //Le constructeur initialise la collection de chevaux
     public function __construct()
     {
         $this->horses = new ArrayCollection();
     }
 
+    //Les getters et setters sont générés automatiquement par Symfony
     public function getId(): ?int
     {
         return $this->id;
@@ -216,7 +226,16 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getHorses(): Collection
     {
+        //La méthode getHorses() retourne la collection de chevaux
         return $this->horses;
+    }
+
+    public function getHorsesByClient(Client $client): Collection
+    {
+        //La méthode getHorsesByClient() retourne la collection de chevaux d'un client
+        return $this->horses->filter(function (Horse $horse) {
+            return $horse->getClientId() === $this;
+        });
     }
 
     public function addHorse(Horse $horse): static
