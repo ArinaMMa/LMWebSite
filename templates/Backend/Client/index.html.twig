@@ -5,7 +5,8 @@
 {% block body %}
 
     <div>
-        <h1>Bienvenue, X </h1>
+        {# Accueil avec nom de l'utilisateur connecté #}
+        <h1>Bienvenue, {{ app.user.firstnameCl }} {{ app.user.lastnameCl }} </h1>
         <div>
             <h2>Tableau de bord</h2>
             <ul>

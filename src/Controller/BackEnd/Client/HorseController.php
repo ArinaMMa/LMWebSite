@@ -52,10 +52,10 @@ class HorseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->persist($horse);
+            // $this->em->persist($horse);
             $this->em->flush();
 
-            return $this->redirectToRoute('app.client.horse.show', ['id' => $horse->getId()]);
+            return $this->redirectToRoute('app.client.horses.show', ['id' => $horse->getId()]);
         }
 
         return $this->render('Backend/Client/Horse/create.html.twig', [
@@ -84,11 +84,11 @@ class HorseController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($horse);
             $this->em->flush();
 
             // TODO: Add a flash message
-            // TODO: Redirect to the show page
-            return $this->redirectToRoute('app.client.horses.index', ['id' => $horse->getId()]);
+            return $this->redirectToRoute('app.client.horses.show', ['id' => $horse->getId()]);
         }
 
         return $this->render('Backend/Client/Horse/edit.html.twig', [

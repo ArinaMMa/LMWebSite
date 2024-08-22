@@ -7,6 +7,18 @@
     background-color: $primary;
     color: $tertiary;
     padding: 1rem 0;
+
+    //Modifier la présentation des liens
+    a {
+        color: $tertiary;
+        text-decoration: none;
+        margin-right: 1rem;
+
+        //au survol, remettre le soulignement
+        &:hover {
+            text-decoration: underline ;
+        }
+    }
     
     //et disposer les colonnes en flex
     &-column {
@@ -30,10 +42,10 @@
                     margin-bottom: 0;
                 }
 
-                a {
-                    display: inline-block;
-                    color: $tertiary !important ;
-                }
+                // a {
+                //     display: inline-block;
+                //     color: $tertiary !important ;
+                // }
             }
         }
     }  

@@ -9,7 +9,14 @@
     </div>
 
     <div class="login-logo">
-        <a href=" {{path('login')}} "><i class="bi bi-people-fill"></i></a>
+        {# Si personne n'est connecté : logo de connexion #}
+        {# Si une personne est connecté : logo de déconnexion #}
+        {% if not app.user %}
+            <a href="{{ path('login') }}"><i class="bi bi-people-fill"></i></a>
+        {% else %}
+            <a href="{{ path('app.client.index') }}"><i class="bi bi-person-vcard"></i></a>
+            <a href="{{ path('logout') }}"><i class="bi bi-box-arrow-right text-danger"></i></a>
+        {% endif %}
     </div>
 
     <nav>

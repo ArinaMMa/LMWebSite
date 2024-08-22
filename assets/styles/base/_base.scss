@@ -10,22 +10,39 @@ body {
     // TODO: JS vérifier la hauteur du contenu, si - de 100vh alors fixed dans le footer
 }
 
+main {
+    //marges minimales à gauche et droite sur les bordures
+    margin-left: 3rem;
+    margin-right: 3rem;
+    //marges minimales en haut et en bas du main
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+
+    //tous les liens dans le main ne sont pas soulignés, sauf au survol
+    a {
+        // color: inherit;
+        text-decoration: none;
+        display: inline-block;
+    
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
 img,
 figure,
 video {
     display: inline-block;
     max-width: 100%;
     object-fit: cover;
-}
-
-a {
-    // color: inherit;
-    text-decoration: none;
-    display: inline-block;
-
-    &:hover {
-        text-decoration: underline;
-    }
 }
 
 ul,
