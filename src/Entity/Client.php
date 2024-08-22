@@ -89,7 +89,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Horse>
      */
-    #[ORM\OneToMany(targetEntity: Horse::class, mappedBy: 'client_id')]
+    #[ORM\OneToMany(targetEntity: Horse::class, mappedBy: 'client')]
     private Collection $horses;
 
     //Le constructeur initialise la collection de chevaux
@@ -230,11 +230,11 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->horses;
     }
 
-    public function getHorsesByClient(Client $client): Collection
+    public function getHorsesByClient(): Collection
     {
         //La méthode getHorsesByClient() retourne la collection de chevaux d'un client
         return $this->horses->filter(function (Horse $horse) {
-            return $horse->getClientId() === $this;
+            return $horse->getClient() === $this;
         });
     }
 
@@ -242,7 +242,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->horses->contains($horse)) {
             $this->horses->add($horse);
-            $horse->setClientId($this);
+            $horse->setClient($this);
         }
 
         return $this;
@@ -252,8 +252,8 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->horses->removeElement($horse)) {
             // set the owning side to null (unless already changed)
-            if ($horse->getClientId() === $this) {
-                $horse->setClientId(null);
+            if ($horse->getClient() === $this) {
+                $horse->setClient(null);
             }
         }
 

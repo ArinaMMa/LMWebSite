@@ -8,10 +8,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: HorseRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[Vich\Uploadable]
 class Horse
 {
     //Un trait permettant de factoriser le code pour les champs createdAt et updatedAt
@@ -59,35 +62,56 @@ class Horse
     #[ORM\Column(nullable: true)]
     private ?string $picture_ho = null;
 
+    //Le fichier de la photo du cheval est géré par VichUploaderBundle
+    #[Vich\UploadableField(mapping: 'horses', fileNameProperty: 'picture_ho')]
+    private ?File $pictureFile = null;
+
+    //Le setter de la photo du cheval permet de mettre à jour la date de modification de la photo
+    public function setPictureFile(?File $pictureFile = null): static
+    {
+        $this->pictureFile = $pictureFile;
+
+        if (null !== $pictureFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+
+        return $this;
+    }
+
+    public function getPictureFile(): ?File
+    {
+        return $this->pictureFile;
+    }
+
     //Le client propriétaire du cheval est obligatoire ; un cheval n'a qu'un seul propriétaire
     #[ORM\ManyToOne(inversedBy: 'horses')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Client $client_id = null;
+    private ?Client $client = null;
 
     //Les vétérinaires du cheval sont optionnels ; un cheval peut avoir plusieurs vétérinaires
     /**
      * @var Collection<int, Vet>
      */
     #[ORM\ManyToMany(targetEntity: Vet::class, inversedBy: 'horses')]
-    private Collection $vet_id;
+    private Collection $vets;
 
     //L'éleveur du cheval est obligatoire ; un cheval n'a qu'un seul éleveur. Une option permettra de renseigner "Eleveur inconnu" si l'éleveur n'est pas connu
     #[ORM\ManyToOne(inversedBy: 'horses')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Breeder $breeder_ho = null;
+    private ?Breeder $breeder = null;
 
     //Les prestations effectuées sur le cheval sont optionnelles ; un cheval peut avoir plusieurs prestations effectuées
     /**
      * @var Collection<int, DonePrestations>
      */
     #[ORM\ManyToMany(targetEntity: DonePrestations::class, inversedBy: 'horses')]
-    private Collection $done_prestation_id;
+    private Collection $done_prestations;
 
     //Le constructeur initialise les collections de vétérinaires et de prestations effectuées
     public function __construct()
     {
-        $this->vet_id = new ArrayCollection();
-        $this->done_prestation_id = new ArrayCollection();
+        $this->vets = new ArrayCollection();
+        $this->done_prestations = new ArrayCollection();
     }
 
     //Les getters et setters sont générés automatiquement par Symfony
@@ -156,14 +180,14 @@ class Horse
         return $this;
     }
 
-    public function getClientId(): ?Client
+    public function getClient(): ?Client
     {
-        return $this->client_id;
+        return $this->client;
     }
 
-    public function setClientId(?Client $client_id): static
+    public function setClient(?Client $client): static
     {
-        $this->client_id = $client_id;
+        $this->client = $client;
 
         return $this;
     }
@@ -171,35 +195,35 @@ class Horse
     /**
      * @return Collection<int, Vet>
      */
-    public function getVetId(): Collection
+    public function getVets(): Collection
     {
-        return $this->vet_id;
+        return $this->vets;
     }
 
-    public function addVetId(Vet $vetId): static
+    public function addVet(Vet $vet): static
     {
-        if (!$this->vet_id->contains($vetId)) {
-            $this->vet_id->add($vetId);
+        if (!$this->vets->contains($vet)) {
+            $this->vets->add($vet);
         }
 
         return $this;
     }
 
-    public function removeVetId(Vet $vetId): static
+    public function removeVet(Vet $vet): static
     {
-        $this->vet_id->removeElement($vetId);
+        $this->vets->removeElement($vet);
 
         return $this;
     }
 
-    public function getBreederHo(): ?Breeder
+    public function getBreeder(): ?Breeder
     {
-        return $this->breeder_ho;
+        return $this->breeder;
     }
 
-    public function setBreederHo(?Breeder $breeder_ho): static
+    public function setBreeder(?Breeder $breeder): static
     {
-        $this->breeder_ho = $breeder_ho;
+        $this->breeder = $breeder;
 
         return $this;
     }
@@ -207,23 +231,23 @@ class Horse
     /**
      * @return Collection<int, DonePrestations>
      */
-    public function getDonePrestationId(): Collection
+    public function getDonePrestations(): Collection
     {
-        return $this->done_prestation_id;
+        return $this->done_prestations;
     }
 
-    public function addDonePrestationId(DonePrestations $donePrestationId): static
+    public function addDonePrestation(DonePrestations $donePrestation): static
     {
-        if (!$this->done_prestation_id->contains($donePrestationId)) {
-            $this->done_prestation_id->add($donePrestationId);
+        if (!$this->done_prestations->contains($donePrestation)) {
+            $this->done_prestations->add($donePrestation);
         }
 
         return $this;
     }
 
-    public function removeDonePrestationId(DonePrestations $donePrestationId): static
+    public function removeDonePrestation(DonePrestations $donePrestation): static
     {
-        $this->done_prestation_id->removeElement($donePrestationId);
+        $this->done_prestations->removeElement($donePrestation);
 
         return $this;
     }
