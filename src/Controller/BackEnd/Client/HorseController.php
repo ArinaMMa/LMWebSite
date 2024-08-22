@@ -23,6 +23,9 @@ class HorseController extends AbstractController
     #[Route('', name: '.index', methods: ['GET'])]
     public function index(): Response
     {
+        /**
+         * @var Client $user
+         */
         $user = $this->getUser();
 
         //Admin voit tous les chevaux
@@ -30,12 +33,7 @@ class HorseController extends AbstractController
             $horses = $this->horseRepository->findAll();
         } else {
             //Client voit uniquement les chevaux dont il est propriétaire
-            if ($user instanceof Client) { // Assurez-vous que $user est bien un Client
-                $horses = $user->getHorsesByClient($user);
-            } else {
-                //une erreur est levée si l'utilisateur n'est pas un client
-                throw new \LogicException('L\'utilisateur n\'est pas un client.');
-            }
+            $horses = $user->getHorsesByClient($user);
         }
 
         return $this->render('Backend/Client/Horse/index.html.twig', [

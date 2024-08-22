@@ -8,18 +8,25 @@
 {% block body %}
 
     <div class="example-wrapper">
-        <h1>Mon cheval X</h1>
+        <h1>Mon cheval {{ horse.nameHo }} </h1>
 
         <div class="card">
             <div class="card-body">
+                {# afficher le nom du cheval #}
                 <h5 class="card-title">{{ horse.nameHo }}</h5>
+                {# Afficher la photo du cheval si elle est existante #}
+                {% if horse.pictureHo %}
+                {# TODO: re mapper le chemin du dossier d'img chevaux, enregistrer les ims avec un nom donné pour les retrouver #}
+                    <img src="{{ asset('images/horses/' ~ horse.pictureHo) }}" alt="Photo de {{ horse.nameHo }}" loading="lazy" class="img-fluid">
+                {% endif %}
+                {# afficher le sexe du cheval, etc #}
                 <p class="card-text">Sexe : {{ horse.sexHo }}</p>
                 <p class="card-text">Race : {{ horse.breedHo }}</p>
                 <p class="card-text">Âge : {{ 'now'|date('Y') - horse.birthdateHo|date('Y') }} ans</p>
-                <p class="card-text">Vétérinaire : {% for vet in horse.vetId %}
+                <p class="card-text">Vétérinaire : {% for vet in horse.vets %}
                                 {{ vet.lastnameVet }} <br>
                             {% endfor %} </td></p>
-                <p class="card-text">Actions réalisées : {% for donePrestations in horse.donePrestationId %}
+                <p class="card-text">Actions réalisées : {% for donePrestations in horse.donePrestations %}
                                 {{ donePrestations.id }} <br>
                             {% endfor %}</p>
                 <a href="{{ path('app.client.horses.edit', {'id': horse.id}) }}" class="btn btn-primary">Modifier</a>

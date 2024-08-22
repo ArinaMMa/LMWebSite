@@ -82,10 +82,10 @@ class AppFixtures extends Fixture
             $horse = (new Horse())
                 ->setNameHo($this->faker->name())
                 ->setBreedHo($this->faker->word())
-                ->setBreederHo($breeders[array_rand($breeders)])
+                ->setBreeder($breeders[array_rand($breeders)])
                 ->setSexHo($this->faker->randomElement(['Femelle', 'Mâle', 'Hongre']))
                 ->setBirthDateHo($this->faker->dateTimeBetween('-10 years', '-1 years'))
-                ->setClientId($clients[array_rand($clients)]);
+                ->setClient($clients[array_rand($clients)]);
 
             // Ajout de la date de création et de modification
             $horse->setCreatedAt(new \DateTimeImmutable());

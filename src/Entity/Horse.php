@@ -63,7 +63,7 @@ class Horse
     private ?string $picture_ho = null;
 
     //Le fichier de la photo du cheval est géré par VichUploaderBundle
-    #[Vich\UploadableField(mapping: 'horse_pictures', fileNameProperty: 'picture_ho')]
+    #[Vich\UploadableField(mapping: 'horses', fileNameProperty: 'picture_ho')]
     private ?File $pictureFile = null;
 
     //Le setter de la photo du cheval permet de mettre à jour la date de modification de la photo
@@ -76,6 +76,11 @@ class Horse
         }
 
         return $this;
+    }
+
+    public function getPictureFile(): ?File
+    {
+        return $this->pictureFile;
     }
 
     //Le client propriétaire du cheval est obligatoire ; un cheval n'a qu'un seul propriétaire
