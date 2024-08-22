@@ -8,7 +8,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Entity\File;
 
 #[ORM\Entity(repositoryClass: HorseRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -58,6 +60,9 @@ class Horse
     //La photo du cheval n'est pas obligatoire et est gérée par VichUploaderBundle
     #[ORM\Column(nullable: true)]
     private ?string $picture_ho = null;
+
+    #[Vich\UploadableField(mapping: 'horse_pictures', fileNameProperty: 'picture_ho')]
+    private ?File $pictureFile = null;
 
     //Le client propriétaire du cheval est obligatoire ; un cheval n'a qu'un seul propriétaire
     #[ORM\ManyToOne(inversedBy: 'horses')]
