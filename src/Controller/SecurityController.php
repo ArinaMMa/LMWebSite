@@ -56,4 +56,11 @@ class SecurityController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    //Se déconnecter
+    #[Route('/logout', name: 'logout', methods: ['GET'])]
+    public function logout(): void
+    {
+        //Cette méthode est vide, elle est juste là pour permettre à Symfony de gérer la déconnexion
+    }
 }
