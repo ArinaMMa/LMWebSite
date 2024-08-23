@@ -5,9 +5,12 @@
 {% block body %}
 
     <section class="presentation">
+        <div>
+            <img src="{{ asset('images/background_LM.jpg') }}" alt="Lucile Monti bandeau d'accueil">
+        </div>
         <h2>Qui suis-je ?</h2>
         <div class="presentation-block">
-            <img src="" alt="Lucile Monti">
+            <img src="{{ asset('images/profile_LM1.jpg') }}" alt="Lucile Monti">
             <div class="presentaton-text">
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto neque dolorem cumque eum molestiae eveniet error ducimus, quod laboriosam nobis vel sapiente nostrum in eos odio pariatur. Hic, repudiandae? Libero laudantium possimus nihil, accusantium explicabo a dolor nobis cum porro, natus facilis quidem praesentium aperiam officia quasi officiis debitis perspiciatis iusto? Laudantium molestias beatae soluta autem. Iste sint eveniet accusamus omnis temporibus id expedita adipisci nostrum soluta rerum voluptatum magnam, deserunt ea. Voluptatibus assumenda quaerat illum praesentium omnis reiciendis et, natus, deleniti quae, iusto doloribus animi ad numquam iste facilis cumque iure reprehenderit aperiam totam quisquam sit culpa excepturi rem aspernatur. Beatae eum possimus animi voluptas expedita tempora autem quia, mollitia odit inventore maiores illo, nostrum, quod quam earum? Amet nam molestiae voluptate! Magni, perspiciatis dolorum officiis excepturi facere quaerat pariatur natus voluptate, veritatis aut maiores iste quos quia corrupti, eum laboriosam similique ad itaque qui! Officia impedit dicta officiis!</p>
             </div>
@@ -94,17 +97,25 @@
     </section>
 
     <section clas="contacts">
-        <h2>Contact</h2>
-        <img src="" alt="Logo Lucile Monti">
-        <form action="">
-            <label for="name">Nom</label>
-            <input type="text" name="name" id="name" required>
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" required>
-            <label for="message">Message</label>
-            <textarea name="message" id="message" required></textarea>
-            <button type="submit" class="btn btn-primary">Envoyer</button>
-        </form>
+        <div>
+            <h2>Contact</h2>
+            <img src="{{ asset('images/logo_LM.png') }}" alt="Logo Lucile Monti">
+        </div>
+        <div>
+            <form action="">
+                <label for="name">Nom</label>
+                <input type="text" name="name" id="name" required>
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" required>
+                <label for="message">Message</label>
+                <textarea name="message" id="message" required></textarea>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </form>
+        </div>
+        <div>
+            <h3>Et retrouvez-moi sur les réseaux sociaux</h3>
+            {% include 'Frontend/components/_socials.html.twig' %}
+        </div>
     </section>
 
 {% endblock %}

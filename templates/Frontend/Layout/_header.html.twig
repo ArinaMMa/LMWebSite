@@ -3,7 +3,7 @@
 <header>
     <div class="header-logo">
         <a href="/">
-            <img src="" alt="Logo de Lucile Monti">
+            <img src="{{ asset('images/logo_LM.png') }}" alt="Logo de Lucile Monti">
         </a>
         <p>Secteur Villefranche-de-Rouergue (Aveyron 12)</p>
     </div>
@@ -21,10 +21,10 @@
 
     <nav>
         <ul>
-            <li><a href="{{ path('home') }}">Présentation</a></li>
-            <li><a href="#">Services et prestations</a></li>
-            <li><a href="#">Galerie photo</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="{{ path('home') }}"><i class="bi bi-person-raised-hand"></i> Présentation</a></li>
+            <li><a href="#"><i class="bi bi-basket-fill"></i> Services et prestations</a></li>
+            <li><a href="#"><i class="bi bi-camera-fill"></i> Galerie photo</a></li>
+            <li><a href="#"><i class="bi bi-telephone-fill"></i> Contact</a></li>
         </ul>
     </nav>
 </header>
