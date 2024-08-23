@@ -44,13 +44,18 @@ class HorseController extends AbstractController
     #[Route('/create', name: '.create', methods: ['GET', 'POST'])]
     public function create(Request $request): Response
     {
+        // Crée un nouveau cheval
         $horse = new Horse();
+        // Récupère l'utilisateur connecté
+        $user = $this->getUser();
+        // Associe le cheval à l'utilisateur
+        $horse->setClient($user); 
 
         $form = $this->createForm(HorseType::class, $horse);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // $this->em->persist($horse);
+            $this->em->persist($horse);
             $this->em->flush();
 
             return $this->redirectToRoute('app.client.horses.show', ['id' => $horse->getId()]);

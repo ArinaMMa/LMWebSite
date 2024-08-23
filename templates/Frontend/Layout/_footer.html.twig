@@ -1,36 +1,40 @@
 <footer>
     <div class="footer">
         <div class="footer-column">
-            <h3>Navigation du site</h3>
+            <h3><i class="bi bi-signpost-split-fill"></i> Navigation du site</h3>
             <ul>
-                <li><a href="#">Présentation</a></li>
-                <li><a href="#">Services et prestations</a></li>
-                <li><a href="#">Galerie photos</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="{{ path('home') }}"><i class="bi bi-person-raised-hand"></i> Présentation</a></li>
+                <li><a href="#"><i class="bi bi-basket-fill"></i> Services et prestations</a></li>
+                <li><a href="#"><i class="bi bi-camera-fill"></i> Galerie photos</a></li>
+                <li><a href="#"><i class="bi bi-telephone-fill"></i> Contact</a></li>
+                {# Si utilisateur connecté, affichage de l'accès aux informations personnelles #}
+                {% if app.user %}
+                    <li><a href="{{ path('app.client.index') }}"><i class="bi bi-person-vcard-fill"></i> Mon compte</a></li>
+                {% endif %}
             </ul>
         </div>
 
         <div class="footer-column">
-            <h3>Contact</h3>
+            <h3><i class="bi bi-telephone-fill"></i> Contact</h3>
             <p>Lucile MONTI</p>
             <p>Téléphone: 123-456-7890</p>
-            <p><a href="mailto:info@example.com">Email: info@example.com</a></p>
+            <p><a href="mailto:lucilemonti@gmail.com">Email: lucilemonti@gmail.com</a></p>
         </div>
 
         <div class="footer-column">
-            <h3>Mentions légales</h3>
+            <h3><i class="bi bi-file-earmark-text-fill"></i> Mentions légales</h3>
             <ul>
-                <li><a href="#">Terms of Service</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Cookie Policy</a></li>
+                <li><a href="#">Conditions</a></li>
+                <li><a href="#">Respect de la vie privée</a></li>
+                {# <li><a href="#">Cookie Policy</a></li> #}
             </ul>
 
             <div class="footer-column-socials">
-                <h3>Réseaux sociaux</h3>
+                <h3><i class="bi bi-globe2"></i> Réseaux sociaux</h3>
                 <ul>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Instagram</a></li>
-                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#"><i class="bi bi-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="bi bi-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="bi bi-linkedin"></i> Linkedin</a></li>
                 </ul>
             </div>
         </div>
