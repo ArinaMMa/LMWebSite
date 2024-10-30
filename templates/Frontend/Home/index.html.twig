@@ -5,11 +5,13 @@
 {% block body %}
 
     <section class="presentation">
+        {# TODO: format img #}
         <div>
             <img src="{{ asset('images/background_LM.jpg') }}" alt="Lucile Monti bandeau d'accueil">
         </div>
         <h2>Qui suis-je ?</h2>
         <div class="presentation-block">
+        {# TODO: format img #}
             <img src="{{ asset('images/profile_LM1.jpg') }}" alt="Lucile Monti">
             <div class="presentaton-text">
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Architecto neque dolorem cumque eum molestiae eveniet error ducimus, quod laboriosam nobis vel sapiente nostrum in eos odio pariatur. Hic, repudiandae? Libero laudantium possimus nihil, accusantium explicabo a dolor nobis cum porro, natus facilis quidem praesentium aperiam officia quasi officiis debitis perspiciatis iusto? Laudantium molestias beatae soluta autem. Iste sint eveniet accusamus omnis temporibus id expedita adipisci nostrum soluta rerum voluptatum magnam, deserunt ea. Voluptatibus assumenda quaerat illum praesentium omnis reiciendis et, natus, deleniti quae, iusto doloribus animi ad numquam iste facilis cumque iure reprehenderit aperiam totam quisquam sit culpa excepturi rem aspernatur. Beatae eum possimus animi voluptas expedita tempora autem quia, mollitia odit inventore maiores illo, nostrum, quod quam earum? Amet nam molestiae voluptate! Magni, perspiciatis dolorum officiis excepturi facere quaerat pariatur natus voluptate, veritatis aut maiores iste quos quia corrupti, eum laboriosam similique ad itaque qui! Officia impedit dicta officiis!</p>
@@ -17,11 +19,12 @@
 
             <div class="presentation-award">
                 <h3>Prix remportés</h3>
-                <img src="" alt="1er prix">
-                <img src="" alt="2e prix">
-                <img src="" alt="3e prix">
-                <img src="" alt="4e prix">
-                <img src="" alt="5e prix">
+                {# TODO: modif taille et présentation des prix #}
+                <img src="{{ asset('images//homepage/flotPrix.jpg') }}" alt="1er prix">
+                <img src="{{ asset('images//homepage/flotPrix.jpg') }}" alt="2e prix">
+                <img src="{{ asset('images//homepage/flotPrix.jpg') }}" alt="3e prix">
+                <img src="{{ asset('images//homepage/flotPrix.jpg') }}" alt="4e prix">
+                <img src="{{ asset('images//homepage/flotPrix.jpg') }}" alt="5e prix">
             </div>
         </div>
     </section>
@@ -30,43 +33,43 @@
         <h2>Services et prestations</h2>
         <div class="services-cards">
             <div class="services-cards-activity">
-                <img src="" alt="Service 1">
-                <h3>Service 1</h3>
+                <h3>Débourrage</h3>
+                <img src="{{ asset('images//homepage/debourrage.jpg') }}" alt="Débourrage">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
-                <em>Prix €</em>
+                <em>100 € / heure</em>
             </div>
 
             <div class="services-cards-activity">
-                <img src="" alt="Service 2">
-                <h3>Service 2</h3>
+                <img src="{{ asset('images//homepage/coursEquitation.webp') }}" alt="Cours individuel niveau débutant / intermédiaire / confirmé">
+                <h3>Cours individuel niveau débutant / intermédiaire / confirmé</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
-                <em>Prix €</em> 
+                <em>75€ / heure</em> 
             </div>
 
             <div class="services-cards-activity">
-                <img src="" alt="Service 3">
-                <h3>Service 3</h3>
+                <h3>Gardiennage</h3>
+                <img src="{{ asset('images//homepage/coursEquitation.webp') }}" alt="Gardiennage">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
-                <em>Prix €</em>
+                <em>150 € / journée</em>
             </div>
 
             <div class="services-cards-activity">
-                <img src="" alt="Service 4">
                 <h3>Service 4</h3>
+                <img src="{{ asset('images//homepage/debourrage.jpg') }}" alt="Service 4">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
                 <em>Prix €</em>
             </div>
 
             <div class="services-cards-activity">
-                <img src="" alt="Service 5">
                 <h3>Service 5</h3>
+                <img src="{{ asset('images//homepage/debourrage.jpg') }}" alt="Service 5">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
                 <em>Prix €</em>
             </div>
 
             <div class="services-cards-activity">
-                <img src="" alt="Service 6">
                 <h3>Service 6</h3>
+                <img src="{{ asset('images//homepage/debourrage.jpg') }}" alt="Service 6">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
                 <em>Prix €</em>
             </div>
