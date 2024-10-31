@@ -11,7 +11,7 @@
 		{% endblock %}
         
     </head>
-    <body>
+    <body {{ stimulus_controller('scroll') }}>
         {% include 'Frontend/Layout/_header.html.twig' %}
 		<main>
 			{% include 'Frontend/Layout/_flash.html.twig' %}

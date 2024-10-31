@@ -39,7 +39,7 @@ class DonePrestations
     /**
      * @var Collection<int, Horse>
      */
-    #[ORM\ManyToMany(targetEntity: Horse::class, mappedBy: 'done_prestation_id')]
+    #[ORM\ManyToMany(targetEntity: Horse::class, mappedBy: 'done_prestations')]
     private Collection $horses;
 
 
@@ -113,7 +113,7 @@ class DonePrestations
     {
         if (!$this->horses->contains($horse)) {
             $this->horses->add($horse);
-            $horse->addDonePrestationId($this);
+            $horse->addDonePrestation($this);
         }
 
         return $this;
@@ -122,7 +122,7 @@ class DonePrestations
     public function removeHorse(Horse $horse): static
     {
         if ($this->horses->removeElement($horse)) {
-            $horse->removeDonePrestationId($this);
+            $horse->removeDonePrestation($this);
         }
 
         return $this;

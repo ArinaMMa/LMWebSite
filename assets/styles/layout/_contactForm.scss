@@ -1,0 +1,32 @@
+.contacts {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    //mettre en forme l'image  
+    .contact-img {
+        justify-content: center;
+    }
+
+    &-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 2000px;
+
+    //mettre en forme le formulaire
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin: 10px 0;
+        }
+    }
+}

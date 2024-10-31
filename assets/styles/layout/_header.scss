@@ -1,5 +1,5 @@
 header {
-    //rendre le header fixe en haut de la page 
+    //fixer le header en haut de la page
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -7,54 +7,101 @@ header {
     top: 0;
     left: 0;
     padding-top: 1rem;
-    //prendre toute la largeur de la page
+
+    //prendre toute la largeur de la page avec uen limite sur les très grands écrans
     width: 100%;
+    max-width: $breakpoint-xl-desktop;
+
     //couleur du fond et de la police, bordure en bas
     background-color: $tertiary;
-    color: $primary; 
+    color: $primary;
     border-bottom: 1px solid $secondary;
 
     //espacement des logos
     .header-logo,
     .login-logo {
-        margin: 0 1rem; 
+        margin: 0 1rem;
     }
 
+    .header-title {
+        display: none;
+        text-align: center;
+
+        //quand on scroll, le titre apparait
+        &.scrolled {
+            display: block;
+            text-align: center;
+            position: absolute;
+            top: 5%;
+
+            //pour les tablettes et mobiles, le titre n'est pas affiché
+            @media(max-width: $breakpoint-tablet) {
+                display: none;
+            }
+        }
+    }
+
+    //gestion du logo
     .header-logo {
         width: max-content;
         margin-right: auto;
         margin-left: auto;
+        transition: all 0.5s ease;
 
-        img {
-            width: 50px;
-            height: 50px;
+        // Responsivité pour la taille du logo
+        @media (max-width: $breakpoint-tablet) {
+            width: 150px;
         }
 
+        //si on scroll, le logo devient plus petit et se déplace
+        &.scrolled {
+            width: 150px;
+            transform: translateX(-500px);
+
+            //responsivité taille et déplacement du logo en scroll
+            @media (max-width: $breakpoint-tablet) {
+                //centrer le logo
+                transform: translateX(-50%);
+            }
+
+            & p {
+                font-size: 0.6rem;
+                font-weight: bold;
+            }
+        }
+        //mise en forme du p accompagnant le logo 
         p {
             font-size: 1rem;
             font-weight: bold;
-            margin-top: 1rem;
+            text-align: center;
+            color: $quaternary;
         }
     }
 
+    //gestion du logo de connexion
     .login-logo {
         position: absolute;
         right: 5%;
         top: 2%;
         font-size: 2rem;
-        
     }
-    
-    //et disposer les colonnes en flex
-    nav {
-        margin-top: 1rem;
+
+    //disposer les éléments du menu desktop en ligne
+    .nav-desktop {
+
+        //pour les tablettes et mobiles, le menu est caché
+        @media(max-width: $breakpoint-tablet) {
+            display: none;
+        }
+
+        // margin-top: 1rem;
         background-color: $primary;
         color: $tertiary;
         padding: 0;
         height: 3rem;
         overflow: hidden;
         width: 100%;
-        
+
         //et les liens en ligne
         ul {
             display: flex;
@@ -62,14 +109,13 @@ header {
             justify-content: space-around;
             width: 100%;
             padding: 0;
-            margin:0;
+            margin: 0;
             height: 100%;
-            
+
             li {
                 flex: 1;
                 display: flex;
                 margin-right: 1rem;
-                // padding: 0.5rem;
                 height: 100%;
                 display: flex;
                 align-items: center;
@@ -80,7 +126,7 @@ header {
                 &:last-child {
                     margin-right: 0;
                 }
-                
+
                 &:hover {
                     background-color: $secondary;
                     text-decoration: none;
@@ -88,6 +134,7 @@ header {
 
                 a {
                     color: $tertiary;
+                    text-decoration: none;
                     font-weight: bold;
                     display: block;
                     width: 100%;
@@ -104,5 +151,44 @@ header {
             }
         }
     }
-}
 
+    .nav-menu {
+        display: none;
+        position: absolute;
+        left: 5%;
+        top: 3%;
+
+        .burger-menu {
+            cursor: pointer;
+        }
+
+        @media (max-width: $breakpoint-tablet) {
+            display: block !important;
+        }
+
+        span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px;
+            background-color: $primary;
+        }
+
+        &-content {
+            display: none; // Masquer par défaut
+            background-color: $primary;
+            padding: 1rem;
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        
+            a {
+                color: $tertiary;
+                text-decoration: none;
+            }
+
+            &.active {
+                display: block !important; // Affiche quand la classe active est ajoutée
+            }
+        }
+    }
+}

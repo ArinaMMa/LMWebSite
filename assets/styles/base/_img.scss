@@ -1,0 +1,49 @@
+img {
+    max-width: 25rem;
+    max-height: 25rem;
+    display: block;
+    margin: 1rem auto;
+
+    &.full-width {
+        width: 100% !important;
+        max-width: 2500px;
+        max-height: 100%;
+        margin: 0 !important;
+        top: 0;
+        padding: 0;
+    }
+}
+
+//centrer la div contenant l'img de présentation
+.presentation-img {
+    display: flex;
+    justify-content: center;
+}
+
+//gérer les img dans presentation-award
+.presentation-award {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 1rem 0;
+    img {
+        max-width: 10rem;
+        max-height: auto;
+        margin: 0 1rem;
+    }
+}
+
+//gérer les images dans photos
+.photos-event-display {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 1rem 0;
+    img {
+        max-width: 25rem;
+        max-height: auto;
+        margin: 1 1rem;
+    }
+}
