@@ -20,7 +20,7 @@
             <a href="{{ path('login') }}"><i class="bi bi-people-fill"></i></a>
         {% else %}
             <a href="{{ path('app.client.index') }}"><i class="bi bi-person-vcard"></i></a>
-            <a href="{{ path('logout') }}"><i class="bi bi-box-arrow-right text-danger"></i></a>
+            <a href="{{ path('logout') }}" data-turbo="false"><i class="bi bi-box-arrow-right text-danger"></i></a>
         {% endif %}
     </div>
 
@@ -32,7 +32,7 @@
             <li><a href="#"><i class="bi bi-telephone-fill"></i> Contact</a></li>
         </ul>
     </nav>
-    <nav class="nav-menu">
+    <nav class="nav-menu" {{ stimulus_controller('toggleMenu') }}>
         <div class="burger-menu">
             <span></span>
             <span></span>

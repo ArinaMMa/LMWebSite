@@ -56,11 +56,11 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
         }
         // Responsive pour mobiles et tablettes
-        @media (max-width: 768px) {
+        @media (max-width: $breakpoint-tablet) {
           width: calc(50% - 20px); // 2 cards par ligne en écran moyen/petit
         }
         
-        @media (max-width: 480px) {
+        @media (max-width: $breakpoint-mobile) {
           width: 100%; // 1 card par ligne sur petits écrans
         }
 
