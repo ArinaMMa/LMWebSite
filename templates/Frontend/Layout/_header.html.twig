@@ -19,12 +19,26 @@
         {% endif %}
     </div>
 
-    <nav>
+    <nav class="nav-desktop">
         <ul>
             <li><a href="{{ path('home') }}"><i class="bi bi-person-raised-hand"></i> Présentation</a></li>
             <li><a href="#"><i class="bi bi-basket-fill"></i> Services et prestations</a></li>
             <li><a href="#"><i class="bi bi-camera-fill"></i> Galerie photo</a></li>
             <li><a href="#"><i class="bi bi-telephone-fill"></i> Contact</a></li>
         </ul>
+    </nav>
+    <nav class="nav-menu">
+        <div class="burger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="nav-menu-content">
+            <li><a href="{{ path('home') }}"><i class="bi bi-person-raised-hand"></i> Présentation</a></li>
+            <li><a href="#"><i class="bi bi-basket-fill"></i> Services et prestations</a></li>
+            <li><a href="#"><i class="bi bi-camera-fill"></i> Galerie photo</a></li>
+            <li><a href="#"><i class="bi bi-telephone-fill"></i> Contact</a></li>
+        </ul> 
     </nav>
 </header>

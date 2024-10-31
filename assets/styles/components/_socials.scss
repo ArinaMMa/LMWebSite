@@ -1,0 +1,23 @@
+//mettre en forme les réseaux sociaux
+.contacts .socials {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+    
+    //gérer les liens
+    a {
+        //couleur des liens
+        color: $primary;
+        //transition
+        transition: color 0.3s;
+        //effet au survol
+        &:hover {
+            color: $secondary;
+            text-decoration: none;
+        }
+
+        i {
+            font-size: 5rem;
+        }
+    }
+}

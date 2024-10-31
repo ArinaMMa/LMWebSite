@@ -1,6 +1,7 @@
+//mise en forme des cards
 .card {
-    background-color: $tertiary;
-    border-radius: 4px;
+    background-color: $tertiary; 
+    border-radius: 4px; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-bottom: 20px;
@@ -8,15 +9,18 @@
     &:hover {
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     }
+    //le titre de la card
     &-title {
         font-size: 20px;
         margin-bottom: 10px;
         font-weight: 700;
         color: $primary;
     }
+    //le contenu de la card
     &-content {
         font-size: 16px;
     }
+    //le footer de la card
     &-footer {
         display: flex;
         justify-content: space-between;
@@ -30,4 +34,60 @@
         }
         }
     }
+}
+
+//mise en forme spécifique aux services-cards
+.services-cards {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    //les cards
+    &-activity {
+        // 3 cards par ligne
+        width: calc(33.333% - 20px);
+        background-color: $tertiary; 
+        border-radius: 4px; 
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+        transition: all 0.3s;
+        &:hover {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+        // Responsive pour mobiles et tablettes
+        @media (max-width: 768px) {
+          width: calc(50% - 20px); // 2 cards par ligne en écran moyen/petit
+        }
+        
+        @media (max-width: 480px) {
+          width: 100%; // 1 card par ligne sur petits écrans
+        }
+
+        //le titre de la card
+        &-title {
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: $primary;
+            text-align: center;
+        }
+        //l'image de la card
+        &-img {
+            border-radius: 5%;
+            padding: 1rem;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 25rem;
+            display: block;
+
+        }
+        //le texte de la card
+        &-text {
+            font-size: 14px;
+            margin-top: 10px;
+            padding: 0 10px;
+        }
+    }
+
 }

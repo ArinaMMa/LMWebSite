@@ -7,6 +7,8 @@ import './bootstrap.js';
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
+import './js/scroll.js';
+import './js/toggleMenu.js';
 import './styles/app.scss';
 
 require('bootstrap');
