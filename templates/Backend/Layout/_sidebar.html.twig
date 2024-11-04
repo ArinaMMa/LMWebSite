@@ -1,0 +1,42 @@
+<header>
+    <div class="login-logo">
+        {# Si personne n'est connecté : logo de connexion #}
+        {# Si une personne est connecté : logo de déconnexion #}
+        {% if not app.user %}
+            <a href="{{ path('login') }}"><i class="bi bi-people-fill"></i></a>
+        {% else %}
+            <a href="{{ path('app.client.index') }}"><i class="bi bi-person-vcard"></i></a>
+            <a href="{{ path('logout') }}" data-turbo="false"><i class="bi bi-box-arrow-right text-danger"></i></a>
+        {% endif %}
+    </div>
+    
+    <div class="sidebar-menu">
+        <ul>
+            <li><a href="{{ path('home') }}">Retourner au site</a></li>
+            <li><a href="{{ path('app.client.show') }}">Mon profil</a></li>
+            <li><a href="{{ path('app.client.horses.index') }}">Mes chevaux</a></li>
+            <li>
+                <a href="{{ path('app.client.index') }}">Se déconnecter</a>
+                <a href="{{ path('logout') }}" data-turbo="false"><i class="bi bi-box-arrow-right text-danger"></i></a>
+            </li>
+        </ul>
+    </div>
+
+    <nav class="sidebar-burger" {{ stimulus_controller('toggleMenu') }}>
+        <div class="sidebar-burger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="nav-menu-content">
+            <li><a href="{{ path('home') }}"><i class="bi bi-person-raised-hand"></i>Retourner au site</a></li>
+            <li><a href="{{ path('app.client.show') }}"><i class="bi bi-people-fill"></i>Mon profil</a></li>
+            <li><a href="{{ path('app.client.horses.index') }}">Mes chevaux</a></li>
+            <li>
+                <a href="{{ path('logout') }}" data-turbo="false"><i class="bi bi-box-arrow-right text-danger"></i></a>
+                <a href="{{ path('app.client.index') }}">Se déconnecter</a>
+            </li>
+        </ul>
+    </nav>
+</header>
