@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'Backend/base.html.twig' %}
 
 {% block title %}Espace personnel  {{parent()}} {% endblock %}
 
@@ -6,8 +6,8 @@
 
     <div>
         {# Accueil avec nom de l'utilisateur connecté #}
-        <h1>Bienvenue, {{ app.user.firstnameCl }} {{ app.user.lastnameCl }} </h1>
-        <div>
+        <h1 class="text-center">Bienvenue, {{ app.user.firstnameCl }} {{ app.user.lastnameCl }} </h1>
+        <div class="container">
             <h2>Tableau de bord</h2>
             <ul>
                 <li><a href=" {{path('app.client.horses.index')}} ">Voir mes chevaux</a></li>

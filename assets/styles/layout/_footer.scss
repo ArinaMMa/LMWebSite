@@ -8,6 +8,11 @@
     color: $tertiary;
     padding: 1rem 0;
 
+    //responsive
+    @media(max-width: $breakpoint-tablet) {
+        flex-direction: column;
+    }
+
     //Modifier la présentation des liens
     a {
         color: $tertiary;
