@@ -1,0 +1,10 @@
+import { Controller } from '@hotwired/stimulus';
+
+export default class extends Controller {
+    connect() {
+        this.element.addEventListener('click', () => {
+            this.element.querySelector('.nav-menu-content').classList.toggle('active');
+            console.log('clicked');
+        });
+    }
+}

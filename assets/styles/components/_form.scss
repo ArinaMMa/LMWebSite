@@ -10,3 +10,17 @@ input {
         color: $text-color;
     }
 }
+
+textarea {
+    padding: 0.5rem;
+    border-radius: $border-radius;
+    border: 1px solid lighten($primary, 50%);
+    min-height: 10rem;
+
+    &:focus {
+        border-color: $primary;
+    }
+    &::placeholder {
+        color: $text-color;
+    }
+}

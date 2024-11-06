@@ -1,10 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'BackEnd/base.html.twig' %}
 
 {% block title %}Modifier mes informations {{parent()}} {% endblock %}
 
 {% block body %}
 
-    <div>
+    <div class="container">
         <h2>Modifier mes informations personnelles</h2>
             {{ form_start(form) }}
                 {{ form_row(form.lastname_cl) }}
@@ -17,5 +17,6 @@
                 <button type="submit" class="btn btn-primary">Enregistrer</button>
             {{ form_end(form) }}
     </div>
+    <a href="{{ path('app.client.index') }}" class="btn btn-primary">Retourner sur mon espace personnel</a>
 
 {% endblock %}

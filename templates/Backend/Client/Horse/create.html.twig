@@ -3,16 +3,19 @@
 {% block title %}Ajouter un cheval {{ parent() }}{% endblock %}
 
 {% block body %}
-    <div class="example-wrapper">
-        <h1>Ajouter un cheval</h1>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card card-body">
-                    <h2 class="card-title>">Informations du cheval</h2>
-                    {% include 'Form/_horseForm.html.twig' with {buttonLabel: 'Créer'} %}
+        <div class="example-wrapper container">
+            <h2>Ajouter un cheval</h1>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-body">
+                        <h2 class="card-title>">Informations du cheval</h2>
+                        {% include 'Form/_horseForm.html.twig' with {buttonLabel: 'Créer'} %}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div class="container">
+            <a href="{{ path('app.client.horses.index') }}" class="btn btn-primary">Retour à la liste des chevaux</a>
+        </div>
 {% endblock %}

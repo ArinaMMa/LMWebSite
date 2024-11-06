@@ -1,57 +1,45 @@
-{% extends 'base.html.twig' %}
+{% extends 'Backend/base.html.twig' %}
 
 {% block title %}Mon compte {{ parent() }}{% endblock %}
 
 {% block body %}
 
 <div class="example-wrapper">
-    <h1>Bienvenue, USER </h1>
+    <h1 class="text-center">Bienvenue, {{ app.user.firstnameCl }} {{ app.user.lastnameCl }} </h1>
 
-    <h2 class="card-title>">Mes chevaux</h2>
-    <a href="{{ path('app.client.horses.create') }}" class="btn btn-primary text-light">Ajouter un cheval</a>
-    {# {% if client.horses|length > 0 %} #}
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Sexe</th>
-                    <th>Race</th>
-                    <th>Age</th>
-                    <th>Vétérinaire</th>
-                    <th>Actions réalisées</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for horse in horses %}
-                    <tr>
-                        <td><a href="{{path('app.client.horses.show', {'id': horse.id})}}">{{ horse.nameHo }}</a></td>
-                        <td>{{ horse.sexHo }}</td>
-                        <td>{{ horse.breedHo }}</td>
-                        {# âge calculé du cheval #}
-                        <td> {{ 'now'|date('Y') - horse.birthdateHo|date('Y') }} ans </td>
-                        <td>
-                            {% for vet in horse.vetId %}
-                                {{ vet.lastnameVet }} <br>
-                            {% endfor %} </td>
-                        <td>
-                            {% for donePrestations in horse.donePrestationId %}
-                                {{ donePrestations.id }} <br>
-                            {% endfor %}
-                        </td>
-                        <th>
-                            <a href=" {{ path('app.client.horses.edit', {'id': horse.id}) }} ">Modifier</a>
+    <div class="container">
+        <h2>Mes chevaux</h2>
+        <a href="{{ path('app.client.horses.create') }}" class="btn btn-primary">Ajouter un cheval</a>
+        <a href="{{ path('app.client.index') }}" class="btn btn-primary">Retourner sur mon espace personnel</a>
+        {# Si l'utilisateur n'a pas de cheval, un message s'affiche pour le signaler #}
+        {% if horses|length > 0 %}
+
+        {# Affichage des chevaux de l'utilisateur sous forme de card #}
+        <div class="row">
+            {% for horse in horses %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="{{ path('app.client.horses.show', {'id': horse.id}) }}"><h5 class="card-title">{{ horse.nameHo }}</h5></a>
+                            {# photo #}
+                            <p class="card-text">{{ horse.sexHo }}</p>
+                            <p class="card-text">{{ horse.breedHo }}</p>
+                            <p class="card-text">{{ 'now'|date('Y') - horse.birthdateHo|date('Y') }} ans</p>
+                            <a href="{{ path('app.client.horses.show', {'id': horse.id}) }}" class="btn btn-primary">Voir</a>
+                            <a href="{{ path('app.client.horses.edit', {'id': horse.id}) }}" class="btn btn-secondary">Modifier</a>
                             <form method="POST" action="{{path('app.client.horses.delete', {'id': horse.id})}}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce cheval ?');" >
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ horse.id) }}">
-                            <button type="submit">Supprimer</button>
+                                <button type="submit"  class="btn btn-danger">Supprimer</button>
                             </form>
-                        </th>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {# {% else %}
-        <p>Vous n'avez pas encore de cheval enregistré.</p>
-    {% endif %} #}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% else %}
+            <p>Vous n'avez pas encore de cheval enregistré.</p>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}

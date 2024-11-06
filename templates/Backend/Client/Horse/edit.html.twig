@@ -14,10 +14,14 @@
 
                 <div class="card card-body">
 
-                    <h2 class="card-title>">Informations du cheval</h2> 
+                    <h2 class="card-title">Informations du cheval</h2> 
                         {% include 'Form/_horseForm.html.twig' with {ButtonLabel: 'Modifier'} %}
                 </div>
             </div>
         </div>
+    </div>
+
+    <div>
+        <a href="{{ path('app.client.horses.index') }}" class="btn btn-primary">Retour à la liste des chevaux</a>
     </div>
 {% endblock %}

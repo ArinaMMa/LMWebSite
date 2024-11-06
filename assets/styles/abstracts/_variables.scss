@@ -5,9 +5,16 @@ $primary: #228B22;
 $secondary: #8B4513;
 //sable
 $tertiary: #F5F5DC;
+//bleu foncé
+$quaternary: #112e4d;
 
 //Fonts
 $text-color: #141414;
 
 //Border
 $border-radius: 8px;
+
+//breakpoints pour le responsive design
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 992px; 
+$breakpoint-xl-desktop: 2500px;

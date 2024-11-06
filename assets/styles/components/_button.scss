@@ -1,0 +1,45 @@
+//affichage des boutons
+.btn {
+    //mise en forme des boutons
+    padding: 10px 20px;
+    border-radius: 5px; 
+    font-size: 16px; 
+    font-weight: 700; 
+    cursor: pointer; 
+    transition: all 0.3s; 
+    margin: 5px;
+    
+    &-primary {
+        //application de spécificités pour le bouton primary
+        border: 1px solid $primary; 
+        background-color: $primary; 
+        color: $tertiary; 
+        &:hover { 
+            //au survol, on change la couleur de fond et de texte
+            background-color: $tertiary; 
+            color: $primary; 
+        }
+    }
+
+    &-danger { 
+        //application de spécificités pour le bouton danger
+        border: 1px solid $danger;  
+        background-color: $danger; 
+        color: $tertiary; 
+        &:hover { 
+            //au survol, on change la couleur de fond et de texte
+            background-color: $tertiary; 
+            color: $danger; 
+        }
+    }
+}
+
+//pour les liens ayant la classe btn, on enlève le soulignement 
+a .btn { 
+    text-decoration: none; 
+
+    //au survol, on enlève le soulignement
+    &:hover {  
+        text-decoration: none;  
+    }
+}

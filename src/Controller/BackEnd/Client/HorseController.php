@@ -23,6 +23,9 @@ class HorseController extends AbstractController
     #[Route('', name: '.index', methods: ['GET'])]
     public function index(): Response
     {
+        /**
+         * @var Client $user
+         */
         $user = $this->getUser();
 
         //Admin voit tous les chevaux
@@ -30,12 +33,7 @@ class HorseController extends AbstractController
             $horses = $this->horseRepository->findAll();
         } else {
             //Client voit uniquement les chevaux dont il est propriétaire
-            if ($user instanceof Client) { // Assurez-vous que $user est bien un Client
-                $horses = $user->getHorsesByClient($user);
-            } else {
-                //une erreur est levée si l'utilisateur n'est pas un client
-                throw new \LogicException('L\'utilisateur n\'est pas un client.');
-            }
+            $horses = $user->getHorsesByClient($user);
         }
 
         return $this->render('Backend/Client/Horse/index.html.twig', [
@@ -46,7 +44,12 @@ class HorseController extends AbstractController
     #[Route('/create', name: '.create', methods: ['GET', 'POST'])]
     public function create(Request $request): Response
     {
+        // Crée un nouveau cheval
         $horse = new Horse();
+        // Récupère l'utilisateur connecté
+        $user = $this->getUser();
+        // Associe le cheval à l'utilisateur
+        $horse->setClient($user); 
 
         $form = $this->createForm(HorseType::class, $horse);
         $form->handleRequest($request);
@@ -55,7 +58,7 @@ class HorseController extends AbstractController
             $this->em->persist($horse);
             $this->em->flush();
 
-            return $this->redirectToRoute('app.client.horse.show', ['id' => $horse->getId()]);
+            return $this->redirectToRoute('app.client.horses.show', ['id' => $horse->getId()]);
         }
 
         return $this->render('Backend/Client/Horse/create.html.twig', [
@@ -84,11 +87,11 @@ class HorseController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($horse);
             $this->em->flush();
 
             // TODO: Add a flash message
-            // TODO: Redirect to the show page
-            return $this->redirectToRoute('app.client.horses.index', ['id' => $horse->getId()]);
+            return $this->redirectToRoute('app.client.horses.show', ['id' => $horse->getId()]);
         }
 
         return $this->render('Backend/Client/Horse/edit.html.twig', [
